@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redemption Status - Eclipsy Members</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d1a;
+      --panel: rgba(20, 20, 40, 0.95);
+      --purple-1: #8b5cf6;
+      --purple-2: #a855f7;
+      --purple-3: #c084fc;
+      --text: #ffffff;
+      --muted: #a1a1aa;
+      --border: rgba(139, 92, 246, 0.15);
+      --success: #22c55e;
+      --success-bg: rgba(34, 197, 94, 0.15);
+      --success-border: rgba(34, 197, 94, 0.35);
+      --warn: #eab308;
+      --warn-bg: rgba(234, 179, 8, 0.15);
+      --warn-border: rgba(234, 179, 8, 0.35);
+      --error: #ef4444;
+      --error-bg: rgba(239, 68, 68, 0.15);
+      --error-border: rgba(239, 68, 68, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      padding: 16px;
+      background-image:
+        radial-gradient(circle at 25% 25%, rgba(139,92,246,0.10) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(139,92,246,0.06) 0%, transparent 50%);
+    }
+
+    .card {
+      width: 100%;
+      max-width: 560px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: 0 8px 32px rgba(139,92,246,0.15);
+      text-align: center;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+      background: linear-gradient(90deg, var(--purple-1), var(--purple-2), var(--purple-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .title { font-size: 1.6rem; font-weight: 800; margin: 8px 0 12px; }
+    .subtitle { color: var(--muted); margin: 0 0 18px; }
+
+    .notice { border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; font-weight: 600; }
+    .notice.success { background: var(--success-bg); border: 1px solid var(--success-border); color: var(--success); }
+    .notice.warn { background: var(--warn-bg); border: 1px solid var(--warn-border); color: var(--warn); }
+    .notice.error { background: var(--error-bg); border: 1px solid var(--error-border); color: var(--error); }
+
+    .details { text-align: left; background: rgba(139,92,246,0.08); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+    .details p { margin: 6px 0; }
+    .details strong { color: var(--purple-1); }
+
+    .footer { margin-top: 16px; color: #676A6F; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand">Eclipsy Members</div>
+    {% if status == "success" %}
+      <div class="title">✅ Redemption Successful</div>
+      <p class="subtitle">Your key has been redeemed successfully.</p>
+      <div class="notice success">Access details are shown below.</div>
+      <div class="details">
+        <p><strong>Service:</strong> {{ service }}</p>
+        <p><strong>Type:</strong> {{ type }}</p>
+        <p><strong>Amount:</strong> {{ amount }}</p>
+      </div>
+    {% elif status == "used" %}
+      <div class="title">⚠️ Key Already Used</div>
+      <p class="subtitle">This key was already redeemed before.</p>
+      <div class="notice warn">Please try a different key.</div>
+    {% else %}
+      <div class="title">❌ Invalid Key</div>
+      <p class="subtitle">The key provided is invalid or not found.</p>
+      <div class="notice error">Double-check the key and try again.</div>
+    {% endif %}
+
+    <div class="footer">© 2025 Eclipsy Members. All rights reserved.</div>
+  </div>
+</body>
+</html>
